@@ -6,9 +6,12 @@
   "scripts": {
     "set-baseURL": "env TEST_BASE_URL=https://google.com",
     "test": "mocha tests",
-    "test-chrome": "env MOCHA_BROWSER=chrome mocha tests",
-    "test-phantomjs": "env MOCHA_BROWSER=phantomjs mocha tests",
-    "test-firefox": "env MOCHA_BROWSER=firefox mocha tests"
+    "test-chrome": "cross-env MOCHA_BROWSER=chrome mocha tests",
+    "test-phantomjs": "cross-env MOCHA_BROWSER=phantomjs mocha tests",
+    "test-firefox": "cross-env MOCHA_BROWSER=firefox mocha tests",
+    "test-opera": "cross-env MOCHA_BROWSER=opera mocha tests",
+    "test-ie": "cross-env MOCHA_BROWSER=ie mocha tests",
+    "test-edge": "cross-env MOCHA_BROWSER=edge mocha tests"
   },
   "repository": {
     "type": "git",
@@ -22,6 +25,7 @@
   "author": "Unified Portal Team",
   "license": "ISC",
   "dependencies": {
+    "add-to-path": "^1.1.2",
     "chai": "^4.1.2",
     "selenium-webdriver": "^3.5.0"
   }

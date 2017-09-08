@@ -7,21 +7,12 @@ var opera = require('selenium-webdriver/opera');
 var edge = require('selenium-webdriver/edge');
 var ie = require('selenium-webdriver/ie');
 
-exports.setBrowserService = function (browser){
-    browsers[browser].setService();
-};
-
 exports.getDriverConfig = function(browser){
     return browsers[browser].driverConfig();
 };
 
 browsers = {
     chrome: {
-        setService: function(){
-            var service = new chrome.ServiceBuilder('drivers/chromedriver.exe').build();
-            
-            chrome.setDefaultService(service);
-        },
         driverConfig: function(){
             var driver = new webdriver.Builder()
             .forBrowser('chrome')
@@ -31,9 +22,6 @@ browsers = {
         }
     },
     phantomjs : {
-        setService: function(){
-            return null;
-        },
         driverConfig: function(){
             var phantomjs_exe = 'drivers/phantomjs.exe';
             var customPhantom = webdriver.Capabilities.phantomjs();
@@ -47,16 +35,47 @@ browsers = {
         }
     },
     firefox: {
-        setService: function(){
-            var service = new firefox.ServiceBuilder('drivers/geckodriver.exe').build();
-        },
         driverConfig: function(){
-            var options = new firefox.Options()
-                .setBinary('drivers/geckodriver.exe');
             var driver = new webdriver.Builder()
                 .forBrowser('firefox')
-                .setFirefoxOptions(options)
                 .build();
+
+            return driver;
+        }
+    },
+    opera: {
+        driverConfig: function(){
+            var service = new opera.ServiceBuilder()
+                .loggingTo('/opera-logs.txt')
+                .enableVerboseLogging()
+                .build();
+            
+            var options = new opera.Options();
+            options.setOperaBinaryPath = __dirname + '/drivers/operadriver.exe';
+
+            var driver = opera.Driver.createSession(options, service);
+
+            return driver;
+        }
+    },
+    ie: {
+        driverConfig: function(){
+            var driver = new webdriver.Builder()
+                .forBrowser('ie')
+                .build();
+
+            return driver;
+        }
+    },
+    edge: {
+        driverConfig: function(){
+            var service = new edge.ServiceBuilder()
+                .setPort(55555)
+                .build();
+       
+            var options = new edge.Options();
+        
+            var driver = edge.Driver.createSession(options, service);
 
             return driver;
         }

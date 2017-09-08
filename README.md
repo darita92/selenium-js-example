@@ -10,13 +10,19 @@ This is a base project using the [`selenium-webdriver`](http://seleniumhq.github
   $ npm install -g mocha
   ```
 
-2. Run all project dependencies:
+4. Install [cross-env](https://www.npmjs.com/package/cross-env) to make sure Environment Variables are set correctly in each OS:
+
+  ```
+  $ npm install -g cross-env
+  ```
+
+3. Run all project dependencies:
 
   ```
   $ npm install
   ```
 
-3. Run the following command to run the test:
+4. Run the following command to run the test:
 
   ```
   $ npm run test
