@@ -45,15 +45,9 @@ browsers = {
     },
     opera: {
         driverConfig: function(){
-            var service = new opera.ServiceBuilder()
-                .loggingTo('/opera-logs.txt')
-                .enableVerboseLogging()
+            var driver = new webdriver.Builder()
+                .forBrowser('opera')
                 .build();
-            
-            var options = new opera.Options();
-            options.setOperaBinaryPath = __dirname + '/drivers/operadriver.exe';
-
-            var driver = opera.Driver.createSession(options, service);
 
             return driver;
         }
