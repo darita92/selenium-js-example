@@ -41,11 +41,14 @@ The available environment variables to override are:
     - ie
     - edge
 
-    There npm commands predefined to overwrite this variable:
+    There are npm commands predefined to overwrite this variable:
     ```
-    "set-dev-baseURL": "env TEST_BASE_URL=https://dev-portal.azurewebsites.net",
-    "set-qa-baseURL": "env TEST_BASE_URL=https://qa-portal.azurewebsites.net",
-    "set-prod-baseURL": "env TEST_BASE_URL=https://prod-portal.azurewebsites.net"
+    "test-chrome": "cross-env MOCHA_BROWSER=chrome mocha tests",
+    "test-phantomjs": "cross-env MOCHA_BROWSER=phantomjs mocha tests",
+    "test-firefox": "cross-env MOCHA_BROWSER=firefox mocha tests",
+    "test-opera": "cross-env MOCHA_BROWSER=opera mocha tests",
+    "test-ie": "cross-env MOCHA_BROWSER=ie mocha tests",
+    "test-edge": "cross-env MOCHA_BROWSER=edge mocha tests"
     ```
 
 - TEST_BASE_URL: specifies which url the tests should run on. The best way to overwrite this variable is to create a new script on the `package.json`. For Example:
