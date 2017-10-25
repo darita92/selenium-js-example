@@ -1,5 +1,6 @@
 node_modules/*
 npm-debug.log
 *.orig
-report.xml
+*.png
+*.xml
 screenshot-*.png

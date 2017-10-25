@@ -4,8 +4,7 @@
   "description": "Selenium JS Example Project",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests",
-    "test-xunit": "mocha tests --reporter xunit --reporter-options output=report.xml"
+    "test": "mocha tests --reporter=mocha-multi-reporters"
   },
   "repository": {
     "type": "git",
@@ -23,5 +22,10 @@
     "chai": "^4.1.2",
     "dotenv": "^4.0.0",
     "selenium-webdriver": "^3.5.0"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "mocha-junit-reporter": "^1.15.0",
+    "mocha-multi-reporters": "^1.1.6"
   }
 }
