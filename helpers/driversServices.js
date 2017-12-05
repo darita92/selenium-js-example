@@ -14,10 +14,13 @@ exports.getDriverConfig = function(browser){
 browsers = {
     chrome: {
         driverConfig: function(){
-            var driver = new webdriver.Builder()
-            .forBrowser('chrome')
-            .build();
-
+            var options = new chrome.Options();
+            options.addArguments("--incognito");
+            options.addArguments("--start-maximized");
+            var driver = new webdriver.Builder().            
+            forBrowser("chrome").setChromeOptions(options).
+            build();
+            
             return driver;
         }
     },
@@ -45,9 +48,15 @@ browsers = {
     },
     opera: {
         driverConfig: function(){
-            var driver = new webdriver.Builder()
-                .forBrowser('opera')
+            var service = new opera.ServiceBuilder()
+                .loggingTo('/opera-logs.txt')
+                .enableVerboseLogging()
                 .build();
+            
+            var options = new opera.Options();
+            options.setOperaBinaryPath = __dirname + '/drivers/operadriver.exe';
+
+            var driver = opera.Driver.createSession(options, service);
 
             return driver;
         }
