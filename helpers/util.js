@@ -37,3 +37,9 @@ exports.getAttributeByCss = function(cssSelector, attribute){
 
     return element.getAttribute(attribute);
 };
+
+exports.scrollToByCss = function(cssSelector){
+    var element = findElementByCss(cssSelector);
+    driver.executeScript("arguments[0].scrollIntoView(false)", element);
+    driver.sleep(300);
+};
