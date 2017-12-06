@@ -10,3 +10,32 @@ exports.writeScreenshot = function(data, name) {
     var screenshotRoute = screenshotPath + name + "-" + dateTime + ".png";
     fs.writeFileSync(screenshotRoute, data, 'base64');
 };
+
+function findElementByCss(cssSelector) {
+    var element = driver.findElement(
+        By.css(
+            ".nav-dropdown--language ul li:nth-of-type(2)"
+        )
+    );
+
+    return element;
+};
+exports.findElementByCss = findElementByCss;
+
+exports.clickElementByCss = function(cssSelector) {
+    var element = findElementByCss(cssSelector);
+
+    element.click();
+};
+
+exports.hoverElementByCss = function(cssSelector) {
+    var element = findElementByCss(cssSelector);
+
+    driver.actions().mouseMove(element).perform();
+};
+
+exports.getAttributeByCss = function(cssSelector, attribute){
+    var element = findElementByCss(cssSelector);
+
+    return element.getAttribute(attribute);
+};
