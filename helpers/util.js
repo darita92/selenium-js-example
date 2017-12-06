@@ -13,9 +13,7 @@ exports.writeScreenshot = function(data, name) {
 
 function findElementByCss(cssSelector) {
     var element = driver.findElement(
-        By.css(
-            ".nav-dropdown--language ul li:nth-of-type(2)"
-        )
+        By.css(cssSelector)
     );
 
     return element;
