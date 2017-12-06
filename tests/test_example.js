@@ -2,6 +2,7 @@ var {By, until} = require('selenium-webdriver');
 var test = require('selenium-webdriver/testing');
 var {driver, base_url} = require('../index.js');
 var expect = require('chai').expect;
+var utils = require("../helpers/util.js");
 
 test.describe( 'Test Suite' , function(){
     this.timeout('60000');
@@ -11,7 +12,10 @@ test.describe( 'Test Suite' , function(){
     });
 
     test.after(function(){
-        return driver.close();
+        driver.takeScreenshot().then(function(data) {
+            utils.writeScreenshot(data, 'screenshotName');
+            driver.close();
+        });
     });
 
     test.it( 'Test Case', function(){
