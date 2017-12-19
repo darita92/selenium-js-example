@@ -1,4 +1,5 @@
 var fs = require('fs');
+var {By, until} = require('selenium-webdriver');
 
 exports.writeScreenshot = function(data, name) {
     name = name || 'ss.png';
@@ -11,35 +12,53 @@ exports.writeScreenshot = function(data, name) {
     fs.writeFileSync(screenshotRoute, data, 'base64');
 };
 
-function findElementByCss(cssSelector) {
-    var element = driver.findElement(
-        By.css(cssSelector)
-    );
+class DriverTasks {
+    constructor(method){
+        this.method = method ? method : 'css';
+    }
+    changeMethod(method){
+        this.method = newMethod;
+    }
+    findElement(query, method){
+        var methodToUse = method ? method : this.method;
+        var element = driver.findElement(
+            By[methodToUse](query)
+        );
+    
+        return element;
+    }
+    findElements(query, method){
+        var methodToUse = method ? method : this.method;
+        return driver.findElements(
+            By[methodToUse](query)
+        );
+    }
+    clickElement(query, method){
+        var methodToUse = method ? method : this.method;
+        var element = this.findElement(query, methodToUse);
 
-    return element;
-};
-exports.findElementByCss = findElementByCss;
+        element.click();
+    }
+    hoverElement(query, method){
+        var methodToUse = method ? method : this.method;
+        var element = this.findElement(query, methodToUse);
+        driver.actions().mouseMove(element).perform();
+    }
+    /*
+    Returns a promise
+    */
+    getAttribute(query, attribute, method){
+        var methodToUse = method ? method : this.method;
+        var element = this.findElement(query);
 
-exports.clickElementByCss = function(cssSelector) {
-    var element = findElementByCss(cssSelector);
+        return element.getAttribute(attribute);
+    }
+    scrollTo(query, method){
+        var methodToUse = method ? method : this.method;
+        var element = this.findElement(query, methodToUse);
+        driver.executeScript("arguments[0].scrollIntoView(false)", element);
+        driver.sleep(300);
+    }
+}
 
-    element.click();
-};
-
-exports.hoverElementByCss = function(cssSelector) {
-    var element = findElementByCss(cssSelector);
-
-    driver.actions().mouseMove(element).perform();
-};
-
-exports.getAttributeByCss = function(cssSelector, attribute){
-    var element = findElementByCss(cssSelector);
-
-    return element.getAttribute(attribute);
-};
-
-exports.scrollToByCss = function(cssSelector){
-    var element = findElementByCss(cssSelector);
-    driver.executeScript("arguments[0].scrollIntoView(false)", element);
-    driver.sleep(300);
-};
+exports.DriverTasks = DriverTasks;
