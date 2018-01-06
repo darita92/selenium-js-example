@@ -26,6 +26,7 @@
   "devDependencies": {
     "mocha": "^4.0.1",
     "mocha-junit-reporter": "^1.15.0",
-    "mocha-multi-reporters": "^1.1.6"
+    "mocha-multi-reporters": "^1.1.6",
+    "puppeteer": "^0.13.0"
   }
 }

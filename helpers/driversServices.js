@@ -12,6 +12,21 @@ exports.getDriverConfig = function(browser){
 };
 
 browsers = {
+    headlessChrome: {
+        driverConfig: function(){
+            var options = new chrome.Options();
+            options.addArguments("--headless");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--incognito");
+            options.addArguments("--start-maximized");
+            options.setChromeBinaryPath(require("puppeteer").executablePath());
+            var driver = new webdriver.Builder().            
+            forBrowser("chrome").setChromeOptions(options).
+            build();
+            
+            return driver;
+        }
+    },
     chrome: {
         driverConfig: function(){
             var options = new chrome.Options();
