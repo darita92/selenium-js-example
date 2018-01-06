@@ -8,7 +8,15 @@ var edge = require('selenium-webdriver/edge');
 var ie = require('selenium-webdriver/ie');
 
 exports.getDriverConfig = function(browser){
-    return browsers[browser].driverConfig();
+    if(browser in browsers){
+        return browsers[browser].driverConfig();
+    }
+    else{
+        throw new Error(`
+            Browser not Supported.
+            Make sure you wrote the name correctly.
+        `);
+    }
 };
 
 browsers = {

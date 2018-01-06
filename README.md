@@ -35,6 +35,7 @@ All variables can be modified by changing the `.env` file with the appropiate fi
 - MOCHA_BROWSER: specifies the webdriver to use. Options are:
     - phantomjs
     - chrome
+    - headlessChrome
     - firefox
     - opera
     - safari
@@ -43,3 +44,6 @@ All variables can be modified by changing the `.env` file with the appropiate fi
 
 - TEST_BASE_URL: specifies which url the tests should run on. 
 
+### CI Override
+
+To change the variable during the CI process a special `.env` file can be found on the `helpers` folder, this has the same variables but the values are changed to keys so it can easily be replaced by any value.
