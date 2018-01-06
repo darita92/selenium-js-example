@@ -19,6 +19,16 @@ test.describe( 'Test Suite' , function(){
         });
     });
 
+    test.afterEach(function(){
+        var title = this.currentTest.title.replace(new RegExp(' |/', 'g'), '-');
+        var screenshotName = 'screenshot-' + title;
+        if (this.currentTest.state === 'failed') {
+            driver.takeScreenshot().then(function(data) {
+                writeScreenshot(data, screenshotName);
+            });
+        };
+    });
+
     test.it( 'Search Selenium', function(){
         driver.wait(function(){
             return until.elementIsVisible(By.name('q'));
